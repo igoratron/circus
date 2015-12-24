@@ -34,9 +34,11 @@ describe('transform', function() {
       { section: 'another', value: 'some value' },
     ])).to.eql({
       'some': {
+        section: 'some',
         value: 'some value'
       },
       'another': {
+        section: 'another',
         value: 'some value'
       }
     })
@@ -49,9 +51,11 @@ describe('transform', function() {
     ])).to.eql({
       section: {
         some: {
+          section: 'section.some',
           value: 'some value'
         },
         another: {
+          section: 'section.another',
           value: 'some value'
         }
       }
