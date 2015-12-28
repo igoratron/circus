@@ -27,6 +27,14 @@ describe('getMarkup', function() {
       { another: 'value' }
     ]);
   });
+
+  it('skips non yaml blocks', function() {
+    const fixture = multilineString(
+      '// some value'
+    );
+
+    expect(getMarkup(fixture)).to.eql([]);
+  });
 });
 
 function multilineString(...strings) {
