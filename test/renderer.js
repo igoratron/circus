@@ -3,7 +3,7 @@ import expect from 'expect.js';
 import sinon from 'sinon';
 import Handlebars from 'handlebars';
 
-describe('rendered', function() {
+describe('renderer', function() {
   let templateRenderer;
 
   beforeEach(function() {
@@ -39,45 +39,6 @@ describe('rendered', function() {
       ]);
 
       expect(templateRenderer.callCount).to.be(1);
-    });
-
-    it('returns the compiled data', function() {
-      const result = render([
-        { some: 'value' },
-        { other: 'value' }
-      ]);
-
-      expect(result).to.eql({
-        'ungroupped': 'compiled value'
-      });
-    });
-
-    describe('when groupBy is defined', function() {
-
-      let groupBy;
-
-      beforeEach(function() {
-        groupBy = sinon.stub().returns('some key');
-
-        render([
-          { some: 'value' },
-          { another: 'value' }
-        ], groupBy);
-      });
-
-      it('calls groupBy', function() {
-        expect(groupBy.calledTwice).to.be(true);
-      });
-
-      it('passes grouped data to the template renderer', function() {
-        sinon.assert.calledWith(
-          templateRenderer,
-          [
-            { some: 'value' },
-            { another: 'value' }
-          ]
-        );
-      });
     });
   });
 });
