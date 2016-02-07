@@ -1,4 +1,4 @@
-import renderer from '../lib/renderer';
+import renderer, { registerPartial } from '../lib/renderer';
 import expect from 'expect.js';
 import sinon from 'sinon';
 import Handlebars from 'handlebars';
@@ -40,5 +40,28 @@ describe('renderer', function() {
 
       expect(templateRenderer.callCount).to.be(1);
     });
+  });
+});
+
+describe('registerPartial', function() {
+
+  beforeEach(function() {
+    sinon.stub(Handlebars, 'registerPartial');
+  });
+
+  afterEach(function() {
+    Handlebars.registerPartial.restore();
+  });
+
+  it('returns a function', function() {
+    expect(registerPartial).to.be.a('function');
+  });
+
+  it('calls Handlebars.registerHelper', function() {
+    registerPartial('some name', 'some template');
+    expect(
+      Handlebars.registerPartial
+        .withArgs('some name', 'some template').calledOnce
+    ).to.be(true);
   });
 });
