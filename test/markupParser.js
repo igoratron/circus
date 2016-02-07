@@ -8,7 +8,11 @@ describe('getMarkup', function() {
   });
 
   it('converts a simple commented yaml into a json obj', function() {
-    const fixture = `// some: value`;
+    const fixture = `
+      /*
+       * some: value
+       */
+    `;
 
     expect(getMarkup(fixture)).to.eql([{
       some: 'value'
@@ -16,11 +20,15 @@ describe('getMarkup', function() {
   });
 
   it('converts yaml with multiple sections', function() {
-    const fixture = multilineString(
-      '// some: value',
-      'some other text',
-      '// another: value'
-    );
+    const fixture = `
+      /*
+       * some: value
+       */
+      some other text
+      /*
+       * another: value
+       */
+    `;
 
     expect(getMarkup(fixture)).to.eql([
       { some: 'value' },
@@ -30,10 +38,31 @@ describe('getMarkup', function() {
 
   it('skips non yaml blocks', function() {
     const fixture = multilineString(
-      '// some value'
+      '* some value'
     );
 
     expect(getMarkup(fixture)).to.eql([]);
+  });
+
+  it('does not treat anything selectors as documentation', function() {
+    const fixture = `
+      /*
+       * some: value
+       */
+
+      * {
+        css: property;
+      }
+
+      /*
+       * another: value
+       */
+    `;
+
+    expect(getMarkup(fixture)).to.eql([
+      { some: 'value' },
+      { another: 'value' }
+    ]);
   });
 });
 
