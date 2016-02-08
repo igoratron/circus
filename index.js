@@ -5,16 +5,15 @@ import { PluginError, File } from 'gulp-util';
 import { readFileSync } from 'fs';
 
 import markupParser from './lib/markupParser';
-import renderer, { registerPartial } from './lib/renderer';
+import renderer, { registerPartials } from './lib/renderer';
 
 export default function circus({templates, groupBy}) {
   const pageTemplate = readFileSync(templates.page, 'utf-8');
   const indexTemplate = readFileSync(templates.index, 'utf-8');
-  const layoutTemplate = readFileSync(templates.partials[0], 'utf-8');
+  registerPartials(templates.partials);
 
   const pageRenderer = renderer(pageTemplate);
   const indexRenderer = renderer(indexTemplate);
-  registerPartial('partials/layout', layoutTemplate);
 
   const jsonDocs = [];
 

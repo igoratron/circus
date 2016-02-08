@@ -2,17 +2,14 @@ import renderer, { registerPartial } from '../lib/renderer';
 import expect from 'expect.js';
 import sinon from 'sinon';
 import Handlebars from 'handlebars';
+import marked from 'marked';
 
 describe('renderer', function() {
   let templateRenderer;
 
-  beforeEach(function() {
+  before(function() {
     templateRenderer = sinon.stub().returns('compiled value');
     sinon.stub(Handlebars, 'compile').returns(templateRenderer);
-  });
-
-  afterEach(function() {
-    Handlebars.compile.restore();
   });
 
   it('returns a function', function() {
@@ -23,7 +20,7 @@ describe('renderer', function() {
 
     let render;
 
-    beforeEach(function() {
+    before(function() {
       render = renderer('some template');
     });
 
@@ -32,25 +29,30 @@ describe('renderer', function() {
         .to.be(true);
     });
 
-    it('renders each data element', function() {
-      render([
-        { some: 'value' },
-        { other: 'value' }
-      ]);
+    describe('when a template is compiled with data', function() {
 
-      expect(templateRenderer.callCount).to.be(1);
+      let result;
+
+      before(function() {
+        sinon.stub(marked, 'parse').returns('compiled markdown');
+        result = render('some data');
+      });
+
+      it('passes the result of handlebars into marked', function() {
+        expect(marked.parse.withArgs('compiled value').calledOnce).to.be(true);
+      });
+
+      it('returns markdown', function() {
+        expect(result).to.be('compiled markdown');
+      });
     });
   });
 });
 
 describe('registerPartial', function() {
 
-  beforeEach(function() {
+  before(function() {
     sinon.stub(Handlebars, 'registerPartial');
-  });
-
-  afterEach(function() {
-    Handlebars.registerPartial.restore();
   });
 
   it('returns a function', function() {

@@ -10,10 +10,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "glob": "^6.0.4",
     "gulp-util": "^3.0.7",
     "handlebars": "^4.0.5",
+    "handlebars-registrar": "^1.5.2",
     "js-yaml": "^3.4.2",
     "lodash": "^3.10.1",
+    "marked": "^0.3.5",
     "through2": "^2.0.0"
   },
   "devDependencies": {
