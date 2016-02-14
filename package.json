@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register",
-    "compile": "babel index.js lib/* -d dist"
+    "compile": "babel index.js lib/ -d dist"
   },
   "author": "",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.3.16",
     "babel-plugin-transform-es2015-parameters": "^6.3.25",
     "babel-register": "^6.3.13",
+    "chai": "^3.5.0",
     "eslint": "^1.10.3"
   }
 }
