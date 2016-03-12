@@ -33,4 +33,15 @@ describe('cssToYaml', function() {
       JSON.stringify({ another: 'value' })
     ]);
   });
+
+  it('fires an error event when it cannot parse yaml', function(done) {
+    const fixture = `* some: value`;
+    const output = streamFrom([fixture])
+      .pipe(yamlToJson());
+
+    output.on('error', function(ex) {
+      expect(ex.name).to.eq('YAMLException');
+      done();
+    });
+  });
 });
