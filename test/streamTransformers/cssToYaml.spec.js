@@ -18,7 +18,7 @@ describe('cssToYaml', function() {
     const output = streamFrom([fixture])
       .pipe(cssToYaml());
 
-    return expect(output).to.be.a.stream(['some: value']);
+    return expect(output).to.be.a.stream([' some: value']);
   });
 
   it('converts yaml with multiple sections', function() {
@@ -36,8 +36,8 @@ describe('cssToYaml', function() {
       .pipe(cssToYaml());
 
     return expect(output).to.be.a.stream([
-      'some: value',
-      'another: value'
+      ' some: value',
+      ' another: value'
     ]);
   });
 
@@ -60,8 +60,8 @@ describe('cssToYaml', function() {
       .pipe(cssToYaml());
 
     return expect(output).to.be.a.stream([
-      'some: value',
-      'another: value'
+      ' some: value',
+      ' another: value'
     ]);
   });
 
@@ -76,7 +76,22 @@ describe('cssToYaml', function() {
       .pipe(cssToYaml());
 
     return expect(output).to.be.a.stream([
-      'some: value'
+      ' some: value'
+    ]);
+  });
+
+  it('preserves indentation ', function() {
+    const fixture = `
+    /**
+     * some: value
+     * another: value
+     */
+    `;
+    const output = streamFrom([fixture])
+      .pipe(cssToYaml());
+
+    return expect(output).to.be.a.stream([
+      [' some: value', ' another: value'].join('\n')
     ]);
   });
 });
