@@ -1,5 +1,4 @@
 import combine from 'stream-combiner';
-import { PluginError } from 'gulp-util';
 
 import createAggregatorStream from './streamTransformers/aggregator';
 import createCssToYamlStream from './streamTransformers/cssToYaml';
@@ -20,6 +19,5 @@ export default function circus({templates, groupBy}) {
       partials: templates.partials
     }),
     createToVinylStream()
-  )
-  .on('error', e => { throw new PluginError('circus', e); });
+  );
 }
