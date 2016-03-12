@@ -64,5 +64,20 @@ describe('cssToYaml', function() {
       'another: value'
     ]);
   });
+
+  it('can handle empty lines', function() {
+    const fixture = `
+    /**
+     *
+     * some: value
+     */
+    `;
+    const output = streamFrom([fixture])
+      .pipe(cssToYaml());
+
+    return expect(output).to.be.a.stream([
+      'some: value'
+    ]);
+  });
 });
 
