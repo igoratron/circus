@@ -1,8 +1,8 @@
 # Circus
-Circus is a styleguide generator which processes YAML formatted comments in your SCSS and CSS files and outputs HTML. Although, in many ways this project is very similar to [kss-node](https://github.com/kss-node/kss-node), it takes the "configuration over convention" approach to make the behaviour more explicit.
+Circus is a styleguide generator which processes YAML formatted comments in your SCSS and CSS files and outputs HTML.
 
 ## Introduction
-Circus extracts YAML formatted comments from your source files, converts them into JSON objects and passes them into the Handlebars compiler to make the values available inside the templates. For example, given the following CSS file:
+Although, in many ways this project is very similar to [kss-node](https://github.com/kss-node/kss-node), it takes the "configuration over convention" approach to make the behaviour more explicit. Circus extracts YAML formatted comments from your source files, converts them into JSON objects and passes them into the Handlebars compiler to make the values available inside the templates. For example, given the following CSS file:
 ``` css
 /**
  * section: components.buttons
