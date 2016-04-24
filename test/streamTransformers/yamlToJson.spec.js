@@ -19,6 +19,15 @@ describe('cssToYaml', function() {
     ]);
   });
 
+  it('ignores YAML comments which dont produce an object', function() {
+    const fixture = `some value`;
+
+    const output = streamFrom([fixture])
+      .pipe(yamlToJson());
+
+    return expect(output).to.be.a.stream([]);
+  });
+
   it('converts multiple yaml docs', function() {
     const fixture = [
      'some: value',

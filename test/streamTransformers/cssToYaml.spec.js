@@ -94,5 +94,7 @@ describe('cssToYaml', function() {
       [' some: value', ' another: value'].join('\n')
     ]);
   });
+
+  it('ignores single line comments');
 });
 
