@@ -1,9 +1,10 @@
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
+const chai = require('chai');
+const expect = chai.expect;
+const sinon = require('sinon');
 
-import aggregator from '../../lib/streamTransformers/aggregator';
-import streamContainsHelper from '../../lib/utils/chaiStreamHelper';
-import streamFrom from '../../lib/utils/streamFrom';
+const aggregator = require('../../lib/streamTransformers/aggregator');
+const streamContainsHelper = require('../../lib/utils/chaiStreamHelper');
+const streamFrom = require('../../lib/utils/streamFrom');
 
 chai.use(streamContainsHelper);
 

@@ -1,13 +1,13 @@
-import combine from 'stream-combiner';
+const combine = require('stream-combiner');
 
-import createAggregatorStream from './streamTransformers/aggregator';
-import createCssToYamlStream from './streamTransformers/cssToYaml';
-import createFromVinylStream from './streamTransformers/fromVinyl';
-import createHandlebarsStream from './streamTransformers/handlebars';
-import createToVinylStream from './streamTransformers/toVinyl';
-import createYamlToJsonStream from './streamTransformers/yamlToJson';
+const createAggregatorStream = require('./lib/streamTransformers/aggregator');
+const createCssToYamlStream = require('./lib/streamTransformers/cssToYaml');
+const createFromVinylStream = require('./lib/streamTransformers/fromVinyl');
+const createHandlebarsStream = require('./lib/streamTransformers/handlebars');
+const createToVinylStream = require('./lib/streamTransformers/toVinyl');
+const createYamlToJsonStream = require('./lib/streamTransformers/yamlToJson');
 
-export default function circus({templates, groupBy}) {
+module.exports = function circus({templates, groupBy}) {
   return combine(
     createFromVinylStream(),
     createCssToYamlStream(),
@@ -20,4 +20,4 @@ export default function circus({templates, groupBy}) {
     }),
     createToVinylStream()
   );
-}
+};

@@ -1,12 +1,13 @@
-import Handlebars from 'handlebars';
-import chai, { expect } from 'chai';
-import fs from 'fs';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+const Handlebars = require('handlebars');
+const chai = require('chai');
+const expect = chai.expect;
+const fs = require('fs');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 
-import handlebars from '../../lib/streamTransformers/handlebars';
-import streamContainsHelper from '../../lib/utils/chaiStreamHelper';
-import streamFrom from '../../lib/utils/streamFrom';
+const handlebars = require('../../lib/streamTransformers/handlebars');
+const streamContainsHelper = require('../../lib/utils/chaiStreamHelper');
+const streamFrom = require('../../lib/utils/streamFrom');
 
 chai.use(streamContainsHelper);
 chai.use(sinonChai);
