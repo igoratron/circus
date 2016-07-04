@@ -1,23 +1,28 @@
-import combine from 'stream-combiner';
+const combine = require('stream-combiner');
+const gutil = require('gulp-util');
 
-import createAggregatorStream from './streamTransformers/aggregator';
-import createCssToYamlStream from './streamTransformers/cssToYaml';
-import createFromVinylStream from './streamTransformers/fromVinyl';
-import createHandlebarsStream from './streamTransformers/handlebars';
-import createToVinylStream from './streamTransformers/toVinyl';
-import createYamlToJsonStream from './streamTransformers/yamlToJson';
+const aggregate = require('./lib/streamTransformers/aggregator');
+const cssToYaml = require('./lib/streamTransformers/cssToYaml');
+const fromVinyl = require('./lib/streamTransformers/fromVinyl');
+const handlebars = require('./lib/streamTransformers/handlebars');
+const toVinyl = require('./lib/streamTransformers/toVinyl');
+const yamlToJson = require('./lib/streamTransformers/yamlToJson');
 
-export default function circus({templates, groupBy}) {
+module.exports = function circus({templates, groupBy, debug = false}) {
   return combine(
-    createFromVinylStream(),
-    createCssToYamlStream(),
-    createYamlToJsonStream(),
-    createAggregatorStream(groupBy),
-    createHandlebarsStream({
+    fromVinyl(),
+    cssToYaml(),
+    yamlToJson(),
+    aggregate(groupBy),
+    handlebars({
       index: templates.index,
       page: templates.page,
-      partials: templates.partials
+      partials: templates.partials,
+      debug
     }),
-    createToVinylStream()
-  );
-}
+    toVinyl()
+  )
+  .on('error', function(error) {
+    gutil.log('circus: ', error.message);
+  });
+};

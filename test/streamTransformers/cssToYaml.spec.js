@@ -1,8 +1,9 @@
-import chai, { expect } from 'chai';
+const chai = require('chai');
+const expect = chai.expect;
 
-import cssToYaml from '../../lib/streamTransformers/cssToYaml';
-import streamContainsHelper from '../../lib/utils/chaiStreamHelper';
-import streamFrom from '../../lib/utils/streamFrom';
+const cssToYaml = require('../../lib/streamTransformers/cssToYaml');
+const streamContainsHelper = require('../../lib/utils/chaiStreamHelper');
+const streamFrom = require('../../lib/utils/streamFrom');
 
 chai.use(streamContainsHelper);
 
@@ -94,5 +95,7 @@ describe('cssToYaml', function() {
       [' some: value', ' another: value'].join('\n')
     ]);
   });
+
+  it('ignores single line comments');
 });
 

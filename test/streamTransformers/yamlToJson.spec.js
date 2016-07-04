@@ -1,8 +1,9 @@
-import chai, { expect } from 'chai';
+const chai = require('chai');
+const expect = chai.expect;
 
-import streamContainsHelper from '../../lib/utils/chaiStreamHelper';
-import streamFrom from '../../lib/utils/streamFrom';
-import yamlToJson from '../../lib/streamTransformers/yamlToJson';
+const streamContainsHelper = require('../../lib/utils/chaiStreamHelper');
+const streamFrom = require('../../lib/utils/streamFrom');
+const yamlToJson = require('../../lib/streamTransformers/yamlToJson');
 
 chai.use(streamContainsHelper);
 
@@ -17,6 +18,15 @@ describe('cssToYaml', function() {
     return expect(output).to.be.a.stream([
       JSON.stringify({ some: 'value' })
     ]);
+  });
+
+  it('ignores YAML comments which dont produce an object', function() {
+    const fixture = `some value`;
+
+    const output = streamFrom([fixture])
+      .pipe(yamlToJson());
+
+    return expect(output).to.be.a.stream([]);
   });
 
   it('converts multiple yaml docs', function() {
