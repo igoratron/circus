@@ -1,6 +1,6 @@
 {
   "name": "@igoratron/circus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "js-yaml": "^3.4.2",
     "lodash": "^4.6.1",
     "marked": "^0.3.5",
-    "promisify-node": "^0.3.0",
+    "promisify-node": "^0.4.0",
     "stream-combiner": "^0.2.2",
     "through2": "^2.0.0"
   },
