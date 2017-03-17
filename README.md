@@ -79,3 +79,33 @@ Display the breadcrumbs. Example of usage:
   </nav>
 {{/breadcrumbs}}
 ```
+
+
+### Sidebar
+Display the sidebar. Example of usage:
+
+#### Helper
+The sidebar requires a helper so it can set the context in order to generate it. Also, it needs to build the sidebar recursively, so it requires a separate partial. Pass `level="0"` to add initial depth to the sidebar tree structure. Example:
+
+``` html
+{{#sidebar}}
+  {{> sidebar level="0"}}
+{{/sidebar}}
+```
+#### Partial
+Example of the recursive partial (`{{> sidebar}}`) for the sidebar
+
+``` html
+<ul class="sidebar-nav {{#if level}}sidebar-nav--level-{{level}}{{/if}}">
+  {{#each this as |item|}}
+    {{#if item}}
+      <li>
+        <a href="/{{item.section}}">{{item.title}}</a>
+        {{#if item.children}}
+          {{> sidebar item.children level=item.depth}}
+        {{/if}}
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+```
