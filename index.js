@@ -15,8 +15,9 @@ module.exports = function circus({templates, groupBy, debug = false}) {
     yamlToJson(),
     aggregate(groupBy),
     handlebars({
-      index: templates.index,
-      page: templates.page,
+      homepage: templates.homepage,
+      tableOfContents: templates.tableOfContents,
+      leaf: templates.leaf,
       partials: templates.partials,
       debug
     }),
