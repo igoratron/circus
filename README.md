@@ -63,24 +63,6 @@ Currently, circus can only be used as a gulp plugin
 
 ## Partials and Helpers
 
-### Breadcrumbs
-Display the breadcrumbs. Example of usage:
-``` html
-{{#breadcrumbs section}}
-  <nav class="breadcrumbs">
-    {{#each this}}
-      {{#if @last}}
-        <span class="breadcrumbs__item breadcrumbs__item--last">{{label}}</span>
-      {{else}}
-        <a href="{{url}}" class="breadcrumbs__item">{{label}}</a>
-        <span class="breadcrumbs__separator"></span>
-      {{/if}}
-    {{/each}}
-  </nav>
-{{/breadcrumbs}}
-```
-
-
 ### Sidebar
 Display the sidebar. Example of usage:
 

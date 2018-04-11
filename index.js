@@ -8,7 +8,7 @@ const handlebars = require('./lib/streamTransformers/handlebars');
 const toVinyl = require('./lib/streamTransformers/toVinyl');
 const yamlToJson = require('./lib/streamTransformers/yamlToJson');
 
-module.exports = function circus({templates, groupBy, debug = false}) {
+module.exports = function circus({ templates, groupBy, helpers, debug = false }) {
   return combine(
     fromVinyl(),
     cssToYaml(),
@@ -19,6 +19,7 @@ module.exports = function circus({templates, groupBy, debug = false}) {
       tableOfContents: templates.tableOfContents,
       leaf: templates.leaf,
       partials: templates.partials,
+      helpers,
       debug
     }),
     toVinyl()
